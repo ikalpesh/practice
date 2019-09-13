@@ -13,4 +13,14 @@ private dataurl = 'https://jsonplaceholder.typicode.com/';
   getApicall(url: any) {
     return this.httpiclient.get(this.dataurl + url);
   }
+  postApicall(dataurl, jsonBody) {
+    const httpHeaders = new HttpHeaders({
+      'content-type' : 'application/json; charset=UTF-8'
+    });
+    const options = {
+      headers: httpHeaders,
+    };
+    return this.httpiclient.post(this.dataurl + dataurl, JSON.stringify(jsonBody), options);
+  }
+
 }

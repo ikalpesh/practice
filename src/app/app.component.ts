@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { DetailsService } from './details.service';
+import { FormsModule } from '@angular/forms';
+declare var jQuery: any;
 
 @Component({
   selector: 'app-root',
@@ -7,7 +9,7 @@ import { DetailsService } from './details.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'practice';
+  Mainhead = 'practice';
   postArray: any = [];
   userid: any;
   tittle: any;
@@ -30,4 +32,20 @@ export class AppComponent {
       console.log(data);
       });
   }
+
+addPost() {
+  const jsonBody = {};
+  // tslint:disable-next-line: no-string-literal
+  jsonBody['title'] = this.title;
+  // tslint:disable-next-line: no-string-literal
+  jsonBody['body'] = this.body;
+  // tslint:disable-next-line: no-string-literal
+  jsonBody['userid'] = this.userid;
+  console.log(jsonBody);
+  this._dataservice.postApicall({ url: 'posts', jsonBody })
+  .subscribe(data => {
+      jQuery('#addModal').modal('hide');
+  });
+}
+
 }
